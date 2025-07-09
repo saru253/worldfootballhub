@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FootyVerse - Where Legends Collide</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <img src="assets/images/logo.png" alt="FootyVerse Logo">
+    <h1>FootyVerse</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="blog/post1.html">Messi vs Ronaldo</a>
+    </nav>
+  </header>
+  <main>
+<h2>Welcome to FootyVerse</h2><p>Explore football stories, rivalries, and more. ⚽</p>
+  </main>
+  <footer>
+    <p>© 2025 FootyVerse | All Rights Reserved</p>
+    <p id="clock"></p>
+    <script>
+      function updateTime() {
+        const now = new Date();
+        document.getElementById('clock').textContent =
+          'Local Time: ' + now.toLocaleTimeString();
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+  </footer>
+</body>
+</html>
