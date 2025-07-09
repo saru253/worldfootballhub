@@ -1,14 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>FootyVerse - Where Legends Collide</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- 🔴 LIVE SCORE -->
+  <div style="background:#ffe600;padding:10px;text-align:center;font-weight:bold;">
+    🟢 Live Score: <span id="liveScore">Real Madrid 2 - 1 Barcelona (76')</span>
+  </div>
+
   <header>
-    <img src="assets/images/logo.png" alt="FootyVerse Logo">
+    <img src="assets/images/logo.png" alt="FootyVerse Logo" style="height:60px;" />
     <h1>FootyVerse</h1>
     <nav>
       <a href="index.html">Home</a>
@@ -17,9 +21,32 @@
       <a href="blog/post1.html">Messi vs Ronaldo</a>
     </nav>
   </header>
+
   <main>
-<h2>About Us</h2><p>FootyVerse is your go-to football blog. Where legends like Messi, Ronaldo, and Mbappé collide.</p>
+    <h2>Welcome to FootyVerse</h2>
+    <p>Explore football stories, rivalries, and more. ⚽</p>
+
+    <!-- 🔥 Trending Reels -->
+    <section>
+      <h2>🔥 Trending Reels</h2>
+      <video width="300" controls autoplay muted loop>
+        <source src="https://cdn.videvo.net/videvo_files/video/free/2015-09/large_watermarked/Football2Videvo_preview.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <p>Messi's magic moment ⚽</p>
+    </section>
+
+    <!-- 📅 Upcoming Matches -->
+    <section>
+      <h2>📅 Upcoming Matches</h2>
+      <ul>
+        <li>10 July: Argentina vs Brazil – 10:30 PM IST</li>
+        <li>12 July: France vs Portugal – 8:00 PM IST</li>
+        <li>15 July: Manchester City vs Real Madrid – 7:30 PM IST</li>
+      </ul>
+    </section>
   </main>
+
   <footer>
     <p>© 2025 FootyVerse | All Rights Reserved</p>
     <p id="clock"></p>
