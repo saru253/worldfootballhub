@@ -2,158 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FootyVerse - Where Legends Collide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FootyVerse – Live Football Hub</title>
   <link rel="stylesheet" href="css/style.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
       background: #f9f9f9;
+      margin: 0;
+      padding: 0;
     }
     header {
+      background: #20232a;
+      color: white;
+      padding: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #111;
-      color: #fff;
-      padding: 10px 20px;
-    }
-    header img {
-      height: 40px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      flex: 1;
-      text-align: center;
     }
     nav a {
-      color: #fff;
+      color: white;
+      margin: 0 15px;
       text-decoration: none;
-      margin-left: 15px;
       font-weight: bold;
     }
-    main {
-      padding: 30px;
+    .container {
       max-width: 900px;
       margin: auto;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
     }
-    section {
-      margin-top: 30px;
+    h2 {
+      color: #20232a;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
     }
-    video {
-      border-radius: 12px;
-      max-width: 100%;
+    .match-card {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 15px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
     footer {
       text-align: center;
-      background: #111;
+      padding: 20px;
+      background: #20232a;
       color: white;
-      padding: 20px 10px;
-      margin-top: 40px;
-    }
-    .score-banner {
-      background:#ffe600;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 18px;
+      margin-top: 50px;
     }
   </style>
 </head>
-   <script>
-const token = '4691e458950201fa4e6b3589ccd62b70';
 
-// LIVE MATCHES
-async function loadMatches() {
-  const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
-    method: 'GET',
-    headers: {
-      'x-apisports-key': token
-    }
-  });
-  const data = await res.json();
-  const live = data.response;
-  const container = document.getElementById('live-container');
-
-  if (live.length === 0) {
-    container.innerHTML = "<p>No live matches right now. ⚽</p>";
-    return;
 <body>
- 
-  }
 
-  container.innerHTML = live.map(match => `
-    <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
-      <img src="${match.league.logo}" width="20"> <strong>${match.league.name}</strong> | ${new Date(match.fixture.date).toLocaleTimeString()}
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="${match.teams.home.logo}" width="30">
-          ${match.teams.home.name}
-        </div>
-        <div><strong>${match.goals.home} - ${match.goals.away}</strong></div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          ${match.teams.away.name}
-          <img src="${match.teams.away.logo}" width="30">
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// UPCOMING MATCHES
-async function loadUpcoming() {
-  const res = await fetch('https://v3.football.api-sports.io/fixtures?next=5', {
-    method: 'GET',
-    headers: {
-      'x-apisports-key': token
-    }
-  });
-
-  const data = await res.json();
-  const upcoming = data.response;
-  const container = document.getElementById('upcoming-container');
-
-  container.innerHTML = upcoming.map(match => `
-    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 8px;">
-      <img src="${match.league.logo}" width="20"> <strong>${match.league.name}</strong> (${match.league.country})
-      <br>${new Date(match.fixture.date).toLocaleString()}
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}
-        </div>
-        <span>vs</span>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          ${match.teams.away.name} <img src="${match.teams.away.logo}" width="30">
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-loadMatches();
-loadUpcoming();
-</script>
-
-<!-- LIVE MATCHES SECTION -->
-<h2>⚽ Live Football Matches</h2>
-<div id="live-container" style="display: flex; flex-direction: column; gap: 20px;"></div>
-
-<!-- UPCOMING MATCHES SECTION -->
-<h2 style="margin-top: 40px;">📅 Upcoming Matches</h2>
-<div id="upcoming-container"></div>
-
-  <!-- Live Score Banner -->
-  <div class="score-banner">
-    🟢 Live Score: Real Madrid 2 - 1 Barcelona (76')
-  </div>
-
-  <!-- Header -->
   <header>
-    <img src="assets/images/logo.png" alt="FootyVerse Logo" />
-    <h1>FootyVerse</h1>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="assets/images/logo.png" alt="FootyVerse Logo" width="40" />
+      <h1 style="margin: 0;">FootyVerse</h1>
+    </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -162,281 +69,89 @@ loadUpcoming();
     </nav>
   </header>
 
-  <!-- Main Content -->
-  <main> 
-    <!-- 🌍 FOOTYVERSE – Weekly Matches -->
-<section style="max-width: 1000px; margin: auto; padding: 20px;">
+  <main class="container">
+    <h2>⚽ Live Football Matches</h2>
+    <div id="live-container"></div>
 
-  <!-- 📅 Date Navigation -->
-  <div style="display: flex; justify-content: space-between; overflow-x: auto; gap: 10px; padding: 10px 0; border-bottom: 2px solid #ddd;">
-    <div><strong>Sun<br>6 JUL</strong></div>
-    <div><strong>Mon<br>7 JUL</strong></div>
-    <div style="color: #1976d2;"><strong>Wed<br>9 JUL</strong></div>
-    <div><strong>Thu<br>10 JUL</strong></div>
-    <div><strong>Fri<br>11 JUL</strong></div>
-    <div><strong>Sat<br>12 JUL</strong></div>
-  </div>
-
-  <!-- 🎯 MATCH CARD 1 -->
-  <div style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-top: 20px;">
-    <p style="color: gray;">FIFA Club World Cup | 12:30 AM IST</p>
-    <p>📍 MetLife Stadium, New Jersey</p>
-
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Paris_Saint-Germain_F.C..svg" width="30">
-        <strong>Paris SG</strong>
-      </div>
-      <div style="font-size: 18px;">vs</div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong>Real Madrid</strong>
-        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" width="30">
-      </div>
-    </div>
-
-    <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-      <button style="background:#0047ab;color:white;padding:6px 12px;border:none;border-radius:5px;">Summary</button>
-      <button style="background:#008060;color:white;padding:6px 12px;border:none;border-radius:5px;">Preview</button>
-      <button style="background:#6a1b9a;color:white;padding:6px 12px;border:none;border-radius:5px;">Stats</button>
-    </div>
-  </div>
-
-  <!-- 🎯 MATCH CARD 2 -->
-  <div style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-top: 20px;">
-    <p style="color: gray;">UEFA Women's Euro | HT</p>
-    <p>📍 Stadion Letzigrund, Zurich</p>
-
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg" width="30">
-        <strong>England</strong>
-      </div>
-      <div style="font-size: 18px;"><strong>2 - 0</strong></div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong>Netherlands</strong>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg" width="30">
-      </div>
-    </div>
-
-    <p style="margin-top: 5px; font-size: 14px;">⚽ James 22', Stanway 45+2'</p>
-
-    <div style="margin-top: 10px; display: flex; gap: 10px;">
-      <button style="background:#d32f2f;color:white;padding:6px 12px;border:none;border-radius:5px;">Gamecast</button>
-      <button style="background:#1976d2;color:white;padding:6px 12px;border:none;border-radius:5px;">Stats</button>
-    </div>
-  </div>
-
-  <!-- 🎯 MATCH CARD 3 -->
-  <div style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-top: 20px;">
-    <p style="color: gray;">UEFA Women's Euro | 12:30 AM</p>
-    <p>📍 Kybunpark, St. Gallen</p>
-
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" width="30">
-        <strong>France</strong>
-      </div>
-      <div style="font-size: 18px;">vs</div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong>Wales</strong>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_Wales.svg" width="30">
-      </div>
-    </div>
-
-    <div style="margin-top: 10px; display: flex; gap: 10px;">
-      <button style="background:#0047ab;color:white;padding:6px 12px;border:none;border-radius:5px;">Summary</button>
-      <button style="background:#8e24aa;color:white;padding:6px 12px;border:none;border-radius:5px;">Preview</button>
-    </div>
-  </div>
-
-</section>
-
-    <!-- 🌍 ESPN-style Live Match Card -->
-<section style="margin-top: 40px;">
-  <!-- 🎯 FOOTYVERSE ESPN-STYLE LIVE MATCHES -->
-<section style="max-width: 900px; margin: auto; padding: 30px;">
-  <h2 style="text-align: center;">⚽ Soccer Scores – July 9, 2025</h2>
-
-  <!-- Match 1 -->
-  <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-top: 20px;">
-    <p style="font-size: 14px; color: #888;">FIFA Club World Cup | 12:30 AM IST</p>
-    <p style="font-size: 14px; color: #444;">📍 MetLife Stadium, New Jersey</p>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Paris_Saint-Germain_F.C..svg" width="30">
-        <strong>Paris Saint-Germain</strong>
-      </div>
-      <div style="font-size: 18px;">vs</div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong>Real Madrid</strong>
-        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" width="30">
-      </div>
-    </div>
-
-    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-      <button style="padding: 6px 10px; background: #0047ab; color: #fff; border: none; border-radius: 5px;">Summary</button>
-      <button style="padding: 6px 10px; background: #008060; color: #fff; border: none; border-radius: 5px;">Preview</button>
-      <button style="padding: 6px 10px; background: #6a1b9a; color: #fff; border: none; border-radius: 5px;">Statistics</button>
-    </div>
-  </div>
-
-  <!-- Match 2 -->
-  <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-top: 20px;">
-    <p style="font-size: 14px; color: #888;">UEFA Women's European Championship | HT</p>
-    <p style="font-size: 14px; color: #444;">📍 Stadion Letzigrund, Zürich</p>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg" width="30">
-        <strong>England</strong>
-      </div>
-      <div style="font-size: 18px;"><strong>2 - 0</strong></div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong>Netherlands</strong>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg" width="30">
-      </div>
-    </div>
-
-    <p style="margin: 10px 0; font-size: 14px; color: #444;">⚽ L James (22'), G Stanway (45+2')</p>
-    <div style="display: flex; gap: 10px;">
-      <button style="padding: 6px 10px; background: #d32f2f; color: #fff; border: none; border-radius: 5px;">Gamecast</button>
-      <button style="padding: 6px 10px; background: #0288d1; color: #fff; border: none; border-radius: 5px;">Statistics</button>
-    </div>
-  </div>
-
-  <!-- Match 3 -->
-  <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; margin-top: 20px;">
-    <p style="font-size: 14px; color: #888;">UEFA Women's European Championship | 12:30 AM IST</p>
-    <p style="font-size: 14px; color: #444;">📍 Kybunpark, St. Gallen</p>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; margin: 10px 0;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" width="30">
-        <strong>France</strong>
-      </div>
-      <div style="font-size: 18px;">vs</div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong>Wales</strong>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_Wales.svg" width="30">
-      </div>
-    </div>
-
-    <div style="display: flex; gap: 10px;">
-      <button style="padding: 6px 10px; background: #0047ab; color: #fff; border: none; border-radius: 5px;">Summary</button>
-      <button style="padding: 6px 10px; background: #8e24aa; color: #fff; border: none; border-radius: 5px;">Preview</button>
-    </div>
-  </div>
-
-</section>
-
-  <h2 style="text-align: center;">🏆 FIFA Club World Cup - July 9, 2025</h2>
-
-  <div style="display: flex; justify-content: center; margin-top: 20px;">
-    <div style="background: #fff; border-radius: 10px; padding: 20px; width: 90%; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Paris_Saint-Germain_F.C..svg" alt="PSG" style="width: 40px;" />
-          <strong>Paris Saint-Germain</strong>
-        </div>
-        <div style="font-weight: bold; color: #333;">🕐 12:30 AM IST</div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <strong>Real Madrid</strong>
-          <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Real Madrid" style="width: 40px;" />
-        </div>
-      </div>
-
-      <p style="margin: 10px 0; color: #666; font-size: 14px;">
-        📍 MetLife Stadium, East Rutherford, New Jersey, USA
-      </p>
-
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button style="padding: 8px 12px; background: #0047ab; color: white; border: none; border-radius: 5px;">Preview</button>
-        <button style="padding: 8px 12px; background: #008060; color: white; border: none; border-radius: 5px;">Stats</button>
-        <button style="padding: 8px 12px; background: #6a1b9a; color: white; border: none; border-radius: 5px;">Watch</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <h2>Welcome to FootyVerse</h2>
-    <p>Explore football stories, rivalries, and more. ⚽</p>
-
-    <!-- Reels Section -->
-    <section>
-      <h2>🔥 Trending Reels</h2>
-      <video controls autoplay muted loop>
-        <source src="https://cdn.videvo.net/videvo_files/video/free/2015-09/large_watermarked/Football2Videvo_preview.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <p><strong>Messi's magic moment ⚡</strong></p>
-    </section>
-
-    <!-- Upcoming Matches -->
-    <section>
-      <h2>📅 Upcoming Matches</h2>
-      <ul>
-        <li>10 July: Argentina vs Brazil – 10:30 PM IST</li>
-        <li>12 July: France vs Portugal – 8:00 PM IST</li>
-        <li>15 July: Man City vs Real Madrid – 7:30 PM IST</li>
-      </ul>
-    </section>
+    <h2>📅 Upcoming Matches</h2>
+    <div id="upcoming-container"></div>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <p>© 2025 FootyVerse | All Rights Reserved</p>
-    <p id="clock"></p>
-    <script>
-      function updateTime() {
-        const now = new Date();
-        document.getElementById('clock').textContent =
-          'Local Time: ' + now.toLocaleTimeString();
-      }
-      setInterval(updateTime, 1000);
-      updateTime();
-    </script>
+    &copy; 2025 FootyVerse | All Rights Reserved
   </footer>
+
+  <!-- Live & Upcoming Match Script -->
+  <script>
+    const token = '4691e458950201fa4e6b3589ccd62b70';
+
+    // LIVE MATCHES
+    async function loadMatches() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
+        method: 'GET',
+        headers: {
+          'x-apisports-key': token
+        }
+      });
+      const data = await res.json();
+      const live = data.response;
+      const container = document.getElementById('live-container');
+
+      if (live.length === 0) {
+        container.innerHTML = "<p>No live matches right now. ⚽</p>";
+        return;
+      }
+
+      container.innerHTML = live.map(match => `
+        <div class="match-card">
+          <strong><img src="${match.league.logo}" width="20"> ${match.league.name}</strong> <br>
+          ${new Date(match.fixture.date).toLocaleTimeString()}
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}
+            </div>
+            <strong>${match.goals.home} - ${match.goals.away}</strong>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              ${match.teams.away.name} <img src="${match.teams.away.logo}" width="30">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // UPCOMING MATCHES
+    async function loadUpcoming() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?next=5', {
+        method: 'GET',
+        headers: {
+          'x-apisports-key': token
+        }
+      });
+
+      const data = await res.json();
+      const upcoming = data.response;
+      const container = document.getElementById('upcoming-container');
+
+      container.innerHTML = upcoming.map(match => `
+        <div class="match-card">
+          <strong><img src="${match.league.logo}" width="20"> ${match.league.name}</strong> (${match.league.country})<br>
+          ${new Date(match.fixture.date).toLocaleString()}
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}
+            </div>
+            <span>vs</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              ${match.teams.away.name} <img src="${match.teams.away.logo}" width="30">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    loadMatches();
+    loadUpcoming();
+  </script>
 
 </body>
 </html>
-<script>
-const token = '4691e458950201fa4e6b3589ccd62b70';
-
-async function loadMatches() {
-  const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
-    method: 'GET',
-    headers: {
-      'x-apisports-key': token
-    }
-  });
-  const data = await res.json();
-  const live = data.response;
-  const container = document.getElementById('live-container');
-
-  if (live.length === 0) {
-    container.innerHTML = "<p>No live matches right now. ⚽</p>";
-    return;
-  }
-
-  container.innerHTML = live.map(match => `
-    <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
-      <strong>${match.league.name}</strong> | ${new Date(match.fixture.date).toLocaleTimeString()}
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="${match.teams.home.logo}" width="30">
-          ${match.teams.home.name}
-        </div>
-        <div><strong>${match.goals.home} - ${match.goals.away}</strong></div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          ${match.teams.away.name}
-          <img src="${match.teams.away.logo}" width="30">
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-loadMatches();
-</script>
-
