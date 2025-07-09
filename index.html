@@ -2,43 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>FootyVerse – Live Football</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FootyVerse - Home of Football Legends">
-  <title>FootyVerse - Home</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
+  <div id="liveBar">🟢 Live Score: Loading...</div>
+
   <header>
-    <h1>FootyVerse</h1>
-    <p class="tagline">Where Legends Collide ⚽</p>
+    <div class="logo-section">
+      <img src="assets/images/logo.png" alt="Logo" />
+      <h1>FootyVerse</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="blog/post1.html">Messi vs Ronaldo</a>
+    </nav>
+    <button class="toggle-btn" onclick="toggleDark()">🌓</button>
   </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="blog/post1.html">Messi vs Ronaldo</a>
-  </nav>
-
   <main>
-    <h3>🔴 Live Football Scores</h3>
-    <iframe src="https://www.scorebat.com/embed/livescore/" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
+    <h2>📅 Upcoming Matches</h2>
+    <div id="upcoming"></div>
 
-    <h2>Welcome to FootyVerse</h2>
-    <p>Explore the world of football – stories, rivalries, goals, and greatness. Dive into the magic of Messi, Ronaldo, Mbappé and more.</p>
-
-    <div class="adsense-block">[AdSense Ad Here]</div>
-
-    <h3>Watch Messi’s Top Goals</h3>
-    <iframe width="100%" height="200" src="https://www.youtube.com/embed/nFg0N_JesWs" frameborder="0" allowfullscreen></iframe>
-
-    <h3>Watch Ronaldo’s Legendary Skills</h3>
-    <iframe width="100%" height="200" src="https://www.youtube.com/embed/mhfJSTJTnXU" frameborder="0" allowfullscreen></iframe>
-
-    <h3>⚽ Upcoming Matches</h3>
-    <iframe src="https://www.scorebat.com/embed/matches/" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+    <h2>🔥 Trending Reels</h2>
+    <div class="reel-container">
+      <iframe width="250" height="140" src="https://www.youtube.com/embed/7FqKZ0y1UX0" allowfullscreen></iframe>
+      <iframe width="250" height="140" src="https://www.youtube.com/embed/fCUhCNmHnY8" allowfullscreen></iframe>
+      <iframe width="250" height="140" src="https://www.youtube.com/embed/0XweG4qVWWQ" allowfullscreen></iframe>
+    </div>
   </main>
 
-  <footer>&copy; 2025 FootyVerse</footer>
+  <footer>
+    &copy; 2025 FootyVerse | All Rights Reserved
+  </footer>
+
+  <script>
+    const token = '4691e458950201fa4e6b3589ccd62b70';
+
+    async function loadLive() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
+        headers: { 'x-apisports-key': token }
+      });
+      const data = await res.json();
+      const live = data.response[0];
+      const bar = document.getElementById('liveBar');
+      if (live) {
+        bar.innerHTML = `🟢 Live: ${live.teams.home.name} ${live.goals.home} - ${live.goals.away} ${live.teams.away.name} (${live.fixture.status.elapsed}’)`;
+      } else {
+        bar.innerHTML = "🟡 No live matches currently.";
+      }
+    }
+
+    async function loadUpcoming() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?from=2025-07-09&to=2025-07-15', {
+        headers: { 'x-apisports-key': token }
+      });
+      const data = await res.json();
+      const matches = data.response.slice(0, 5);
+      const container = document.getElementById('upcoming');
+      container.innerHTML = matches.map(m => `
+        <div class="match">
+          <h3><img src="${m.league.logo}" width="20"/> ${m.league.name}</h3>
+          <p>📍 ${m.fixture.venue.name}, ${m.fixture.venue.city}</p>
+          <p><img src="${m.teams.home.logo}" width="30"> ${m.teams.home.name} vs ${m.teams.away.name} <img src="${m.teams.away.logo}" width="30"></p>
+          <p>🕒 ${new Date(m.fixture.date).toLocaleString('en-IN')}</p>
+        </div>
+      `).join('');
+    }
+
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+
+    loadLive();
+    loadUpcoming();
+  </script>
+
 </body>
 </html>
