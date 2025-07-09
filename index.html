@@ -30,11 +30,8 @@
       max-width: 900px;
       margin: auto;
       padding: 20px;
-      <h2>🏆 Upcoming Fixtures – This Week</h2>
-<div id="full-week-container"></div>
-
     }
-    h2 {
+    h2, h3 {
       color: #20232a;
       border-bottom: 2px solid #ccc;
       padding-bottom: 5px;
@@ -53,6 +50,19 @@
       background: #20232a;
       color: white;
       margin-top: 50px;
+    }
+    .actions a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #007bff;
+    }
+    .watch-btn {
+      float: right;
+      background: #28a745;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -73,61 +83,89 @@
   </header>
 
   <main class="container">
-    <h2>⚽ Live Football Matches</h2>
+    <h2>🟢 Live Football Matches</h2>
     <div id="live-container"></div>
 
-    <h2>📅 Upcoming Matches</h2>
-    <div id="upcoming-container"></div>
+    <h2>📅 Upcoming Fixtures – This Week</h2>
+    <div id="full-week-container"></div>
   </main>
 
   <footer>
     &copy; 2025 FootyVerse | All Rights Reserved
   </footer>
 
-  <!-- Live & Upcoming Match Script -->
   <script>
     const token = '4691e458950201fa4e6b3589ccd62b70';
 
-  <script>
-async function loadUpcomingFullWeek() {
-  const res = await fetch('https://v3.football.api-sports.io/fixtures?from=2025-07-09&to=2025-07-15', {
-    method: 'GET',
-    headers: {
-      'x-apisports-key': '4691e458950201fa4e6b3589ccd62b70'
+    // LIVE MATCHES
+    async function loadMatches() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
+        method: 'GET',
+        headers: {
+          'x-apisports-key': token
+        }
+      });
+      const data = await res.json();
+      const live = data.response;
+      const container = document.getElementById('live-container');
+
+      if (live.length === 0) {
+        container.innerHTML = "<p>No live matches right now. ⚽</p>";
+        return;
+      }
+
+      container.innerHTML = live.map(match => `
+        <div class="match-card">
+          <h3><img src="${match.league.logo}" width="20"> ${match.league.name} | ${new Date(match.fixture.date).toLocaleTimeString()}</h3>
+          <p>📍 ${match.fixture.venue.name}, ${match.fixture.venue.city}</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div><img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}</div>
+            <strong>${match.goals.home} - ${match.goals.away}</strong>
+            <div>${match.teams.away.name} <img src="${match.teams.away.logo}" width="30"></div>
+          </div>
+        </div>
+      `).join('');
     }
-  });
 
-  const data = await res.json();
-  const fixtures = data.response;
-  const container = document.getElementById('full-week-container');
+    // UPCOMING FULL WEEK FIXTURES
+    async function loadUpcomingFullWeek() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?from=2025-07-09&to=2025-07-15', {
+        method: 'GET',
+        headers: {
+          'x-apisports-key': token
+        }
+      });
 
-  if (fixtures.length === 0) {
-    container.innerHTML = "<p>No upcoming matches found this week.</p>";
-    return;
-  }
+      const data = await res.json();
+      const fixtures = data.response;
+      const container = document.getElementById('full-week-container');
 
-  container.innerHTML = fixtures.map(match => `
-    <div class="match-card">
-      <h3>🏆 ${match.league.name} | ${new Date(match.fixture.date).toLocaleString('en-IN', { hour12: true })}</h3>
-      <p>📍 ${match.fixture.venue.name}, ${match.fixture.venue.city}</p>
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div><img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}</div>
-        <strong>vs</strong>
-        <div>${match.teams.away.name} <img src="${match.teams.away.logo}" width="30"></div>
-      </div>
-      <div style="margin-top: 8px;">
-        <a href="#" style="margin-right: 15px;">📋 Summary</a>
-        <a href="#" style="margin-right: 15px;">🔍 Preview</a>
-        <a href="#">📊 Stats</a>
-        <a href="#" style="float: right; background: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">📺 Watch</a>
-      </div>
-    </div>
-  `).join('');
-}
+      if (fixtures.length === 0) {
+        container.innerHTML = "<p>No upcoming matches this week.</p>";
+        return;
+      }
 
-loadUpcomingFullWeek();
-</script>
+      container.innerHTML = fixtures.map(match => `
+        <div class="match-card">
+          <h3>🏆 <img src="${match.league.logo}" width="20"> ${match.league.name} | ${new Date(match.fixture.date).toLocaleString('en-IN', { hour12: true })}</h3>
+          <p>📍 ${match.fixture.venue.name}, ${match.fixture.venue.city}</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div><img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}</div>
+            <span>vs</span>
+            <div>${match.teams.away.name} <img src="${match.teams.away.logo}" width="30"></div>
+          </div>
+          <div class="actions" style="margin-top: 8px;">
+            <a href="#">📋 Summary</a>
+            <a href="#">🔍 Preview</a>
+            <a href="#">📊 Stats</a>
+            <a href="#" class="watch-btn">📺 Watch</a>
+          </div>
+        </div>
+      `).join('');
+    }
 
+    loadMatches();
+    loadUpcomingFullWeek();
   </script>
 
 </body>
