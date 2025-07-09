@@ -64,6 +64,78 @@
   </style>
 </head>
 <body>
+  <script>
+const token = '4691e458950201fa4e6b3589ccd62b70';
+
+// LIVE MATCHES
+async function loadMatches() {
+  const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
+    method: 'GET',
+    headers: {
+      'x-apisports-key': token
+    }
+  });
+  const data = await res.json();
+  const live = data.response;
+  const container = document.getElementById('live-container');
+
+  if (live.length === 0) {
+    container.innerHTML = "<p>No live matches right now. ⚽</p>";
+    return;
+  }
+
+  container.innerHTML = live.map(match => `
+    <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+      <img src="${match.league.logo}" width="20"> <strong>${match.league.name}</strong> | ${new Date(match.fixture.date).toLocaleTimeString()}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${match.teams.home.logo}" width="30">
+          ${match.teams.home.name}
+        </div>
+        <div><strong>${match.goals.home} - ${match.goals.away}</strong></div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          ${match.teams.away.name}
+          <img src="${match.teams.away.logo}" width="30">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// UPCOMING MATCHES
+async function loadUpcoming() {
+  const res = await fetch('https://v3.football.api-sports.io/fixtures?next=5', {
+    method: 'GET',
+    headers: {
+      'x-apisports-key': token
+    }
+  });
+
+  const data = await res.json();
+  const upcoming = data.response;
+  const container = document.getElementById('upcoming-container');
+
+  container.innerHTML = upcoming.map(match => `
+    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 8px;">
+      <img src="${match.league.logo}" width="20"> <strong>${match.league.name}</strong> (${match.league.country})
+      <br>${new Date(match.fixture.date).toLocaleString()}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}
+        </div>
+        <span>vs</span>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          ${match.teams.away.name} <img src="${match.teams.away.logo}" width="30">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+loadMatches();
+loadUpcoming();
+</script>
+
 <!-- LIVE MATCHES SECTION -->
 <h2>⚽ Live Football Matches</h2>
 <div id="live-container" style="display: flex; flex-direction: column; gap: 20px;"></div>
