@@ -63,8 +63,7 @@
     }
   </style>
 </head>
-<body>
-  <script>
+   <script>
 const token = '4691e458950201fa4e6b3589ccd62b70';
 
 // LIVE MATCHES
@@ -82,6 +81,8 @@ async function loadMatches() {
   if (live.length === 0) {
     container.innerHTML = "<p>No live matches right now. ⚽</p>";
     return;
+<body>
+ 
   }
 
   container.innerHTML = live.map(match => `
