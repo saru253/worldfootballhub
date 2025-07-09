@@ -1,113 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FootyVerse – Live Football Hub</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <title>FootyVerse – Live Football</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- AdSense (optional) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+    crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
+      background: #f4f4f4;
+      transition: background 0.3s;
     }
+
     header {
       background: #20232a;
       color: white;
-      padding: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 10px 20px;
     }
+
+    header img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
     nav a {
       color: white;
-      margin: 0 15px;
       text-decoration: none;
+      margin: 0 10px;
       font-weight: bold;
     }
+
+    #liveBar {
+      background: #ff0000;
+      color: white;
+      text-align: center;
+      padding: 6px;
+      font-weight: bold;
+    }
+
     .container {
       max-width: 900px;
       margin: auto;
       padding: 20px;
     }
-    h2, h3 {
-      color: #20232a;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 5px;
-    }
-    .match-card {
+
+    .match {
       background: white;
-      border-radius: 10px;
-      border: 1px solid #ddd;
       padding: 15px;
       margin: 15px 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+
+    iframe {
+      border: none;
+      border-radius: 10px;
+    }
+
     footer {
-      text-align: center;
-      padding: 20px;
       background: #20232a;
       color: white;
-      margin-top: 50px;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
     }
-    .actions a {
-      margin-right: 10px;
-      text-decoration: none;
-      color: #007bff;
+
+    .dark {
+      background: #121212;
+      color: #eee;
     }
-    .watch-btn {
-      float: right;
-      background: #28a745;
-      color: white;
+
+    .dark .match {
+      background: #1e1e1e;
+    }
+
+    .toggle-btn {
+      background: white;
+      color: black;
       padding: 5px 10px;
       border-radius: 5px;
-      text-decoration: none;
-    }
-    body.dark {
-      background: #121212;
-      color: #f1f1f1;
-    }
-    body.dark header,
-    body.dark footer {
-      background: #1e1e1e;
-      color: white;
-    }
-    body.dark .match-card {
-      background: #1e1e1e;
-      border-color: #333;
-    }
-    body.dark a {
-      color: #4da3ff;
     }
   </style>
 </head>
-  <!-- ✅ SEO Tags -->
-<meta name="description" content="FootyVerse – Live Football Scores, Highlights, and Upcoming Fixtures. Watch Messi, Ronaldo, Mbappé & more. Updated daily.">
-<meta name="keywords" content="football, live score, Messi, Ronaldo, highlights, PSG, Real Madrid, matches, fixtures, FootyVerse">
-<meta name="author" content="FootyVerse Team">
-<link rel="canonical" href="https://your-footyverse-site.netlify.app/" />
-
-<!-- ✅ Open Graph Tags (for WhatsApp/Facebook) -->
-<meta property="og:title" content="FootyVerse – Live Football Hub" />
-<meta property="og:description" content="Live scores, full week fixtures, and top highlights of your favorite football stars. Stay updated on Messi, Ronaldo, and more!" />
-<meta property="og:image" content="https://yourdomain.com/assets/images/logo.png" />
-<meta property="og:url" content="https://your-footyverse-site.netlify.app/" />
-<meta property="og:type" content="website" />
-
-<!-- ✅ Twitter Card -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="FootyVerse – Where Legends Collide ⚽" />
-<meta name="twitter:description" content="Explore real-time football scores, match previews, stats, and top YouTube highlights!" />
-<meta name="twitter:image" content="https://yourdomain.com/assets/images/logo.png" />
-
-
 <body>
 
+  <div id="liveBar">🟢 Live Score: Loading...</div>
+
   <header>
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <img src="assets/images/logo.png" alt="FootyVerse Logo" width="40" />
-      <h1 style="margin: 0;">FootyVerse</h1>
+    <div style="display:flex; align-items:center;">
+      <img src="assets/images/logo.png" alt="Logo" />
+      <h1 style="margin:0;">FootyVerse</h1>
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -115,23 +108,20 @@
       <a href="contact.html">Contact</a>
       <a href="blog/post1.html">Messi vs Ronaldo</a>
     </nav>
-    <button onclick="toggleDarkMode()" style="padding: 6px 12px; background: #fff; color: #000; border-radius: 5px;">🌓 Toggle</button>
+    <button class="toggle-btn" onclick="toggleDark()">🌓</button>
   </header>
 
-  <main class="container">
-    <h2>🟢 Live Football Matches</h2>
-    <div id="live-container"></div>
+  <div class="container">
+    <h2>📅 Upcoming Matches</h2>
+    <div id="upcoming"></div>
 
-    <h2>📅 Upcoming Fixtures – This Week</h2>
-    <div id="full-week-container"></div>
-
-    <h2>🔥 Top YouTube Highlights</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-      <iframe width="300" height="170" src="https://www.youtube.com/embed/7FqKZ0y1UX0" frameborder="0" allowfullscreen></iframe>
-      <iframe width="300" height="170" src="https://www.youtube.com/embed/fCUhCNmHnY8" frameborder="0" allowfullscreen></iframe>
-      <iframe width="300" height="170" src="https://www.youtube.com/embed/0XweG4qVWWQ" frameborder="0" allowfullscreen></iframe>
+    <h2>🔥 Trending Reels</h2>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <iframe width="300" height="170" src="https://www.youtube.com/embed/7FqKZ0y1UX0" allowfullscreen></iframe>
+      <iframe width="300" height="170" src="https://www.youtube.com/embed/fCUhCNmHnY8" allowfullscreen></iframe>
+      <iframe width="300" height="170" src="https://www.youtube.com/embed/0XweG4qVWWQ" allowfullscreen></iframe>
     </div>
-  </main>
+  </div>
 
   <footer>
     &copy; 2025 FootyVerse | All Rights Reserved
@@ -140,82 +130,43 @@
   <script>
     const token = '4691e458950201fa4e6b3589ccd62b70';
 
-    function toggleDarkMode() {
+    async function loadLive() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
+        headers: { 'x-apisports-key': token }
+      });
+      const data = await res.json();
+      const live = data.response[0];
+      const bar = document.getElementById('liveBar');
+      if (live) {
+        bar.innerHTML = `🟢 Live: ${live.teams.home.name} ${live.goals.home} - ${live.goals.away} ${live.teams.away.name} (${live.fixture.status.elapsed}’)`
+      } else {
+        bar.innerHTML = "🟡 No live matches currently.";
+      }
+    }
+
+    async function loadUpcoming() {
+      const res = await fetch('https://v3.football.api-sports.io/fixtures?from=2025-07-09&to=2025-07-15', {
+        headers: { 'x-apisports-key': token }
+      });
+      const data = await res.json();
+      const matches = data.response.slice(0, 5); // show 5
+      const container = document.getElementById('upcoming');
+      container.innerHTML = matches.map(m => `
+        <div class="match">
+          <h3><img src="${m.league.logo}" width="20"/> ${m.league.name}</h3>
+          <p>📍 ${m.fixture.venue.name}, ${m.fixture.venue.city}</p>
+          <p><img src="${m.teams.home.logo}" width="30"> ${m.teams.home.name} vs ${m.teams.away.name} <img src="${m.teams.away.logo}" width="30"></p>
+          <p>🕒 ${new Date(m.fixture.date).toLocaleString('en-IN')}</p>
+        </div>
+      `).join('');
+    }
+
+    function toggleDark() {
       document.body.classList.toggle('dark');
     }
 
-    async function loadMatches() {
-      const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
-        method: 'GET',
-        headers: {
-          'x-apisports-key': token
-        }
-      });
-      const data = await res.json();
-      const live = data.response;
-      const container = document.getElementById('live-container');
-
-      if (live.length === 0) {
-        container.innerHTML = "<p>No live matches right now. ⚽</p>";
-        return;
-      }
-
-      container.innerHTML = live.map(match => `
-        <div class="match-card">
-          <h3>
-            <a href="https://www.google.com/search?q=${match.teams.home.name}+vs+${match.teams.away.name}+live" 
-               target="_blank" 
-               style="color: #007bff; text-decoration: none;">
-              🟢 ${match.teams.home.name} ${match.goals.home} - ${match.goals.away} ${match.teams.away.name} (${match.fixture.status.elapsed}’)
-            </a>
-          </h3>
-          <p>📍 ${match.fixture.venue.name}, ${match.fixture.venue.city}</p>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div><img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}</div>
-            <div><img src="${match.teams.away.logo}" width="30"> ${match.teams.away.name}</div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    async function loadUpcomingFullWeek() {
-      const res = await fetch('https://v3.football.api-sports.io/fixtures?from=2025-07-09&to=2025-07-15', {
-        method: 'GET',
-        headers: {
-          'x-apisports-key': token
-        }
-      });
-
-      const data = await res.json();
-      const fixtures = data.response;
-      const container = document.getElementById('full-week-container');
-
-      if (fixtures.length === 0) {
-        container.innerHTML = "<p>No upcoming matches this week.</p>";
-        return;
-      }
-
-      container.innerHTML = fixtures.map(match => `
-        <div class="match-card">
-          <h3>🏆 <img src="${match.league.logo}" width="20"> ${match.league.name} | ${new Date(match.fixture.date).toLocaleString('en-IN', { hour12: true })}</h3>
-          <p>📍 ${match.fixture.venue.name}, ${match.fixture.venue.city}</p>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div><img src="${match.teams.home.logo}" width="30"> ${match.teams.home.name}</div>
-            <span>vs</span>
-            <div>${match.teams.away.name} <img src="${match.teams.away.logo}" width="30"></div>
-          </div>
-          <div class="actions" style="margin-top: 8px;">
-            <a href="#">📋 Summary</a>
-            <a href="#">🔍 Preview</a>
-            <a href="#">📊 Stats</a>
-            <a href="#" class="watch-btn">📺 Watch</a>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    loadMatches();
-    loadUpcomingFullWeek();
+    loadLive();
+    loadUpcoming();
   </script>
 
 </body>
