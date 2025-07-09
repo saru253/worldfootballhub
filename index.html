@@ -320,3 +320,43 @@
 
 </body>
 </html>
+<script>
+const token = '4691e458950201fa4e6b3589ccd62b70';
+
+async function loadMatches() {
+  const res = await fetch('https://v3.football.api-sports.io/fixtures?live=all', {
+    method: 'GET',
+    headers: {
+      'x-apisports-key': token
+    }
+  });
+  const data = await res.json();
+  const live = data.response;
+  const container = document.getElementById('live-container');
+
+  if (live.length === 0) {
+    container.innerHTML = "<p>No live matches right now. ⚽</p>";
+    return;
+  }
+
+  container.innerHTML = live.map(match => `
+    <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+      <strong>${match.league.name}</strong> | ${new Date(match.fixture.date).toLocaleTimeString()}
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${match.teams.home.logo}" width="30">
+          ${match.teams.home.name}
+        </div>
+        <div><strong>${match.goals.home} - ${match.goals.away}</strong></div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          ${match.teams.away.name}
+          <img src="${match.teams.away.logo}" width="30">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+loadMatches();
+</script>
+
