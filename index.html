@@ -2,68 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FootyVerse - Where Legends Collide</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FootyVerse - Home of Football Legends">
+  <title>FootyVerse - Home</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
-  <!-- Live Score Banner -->
-  <div style="background:#ffe600;padding:10px;text-align:center;font-weight:bold;">
-    🟢 Live Score: <span id="liveScore">Real Madrid 2 - 1 Barcelona (76')</span>
-  </div>
-
-  <!-- Header -->
   <header>
-    <img src="assets/images/logo.png" alt="FootyVerse Logo" style="height:50px;" />
     <h1>FootyVerse</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="blog/post1.html">Messi vs Ronaldo</a>
-    </nav>
+    <p class="tagline">Where Legends Collide ⚽</p>
   </header>
 
-  <!-- Main Content -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="blog/post1.html">Messi vs Ronaldo</a>
+  </nav>
+
   <main>
+    <h3>🔴 Live Football Scores</h3>
+    <iframe src="https://www.scorebat.com/embed/livescore/" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
+
     <h2>Welcome to FootyVerse</h2>
-    <p>Explore football stories, rivalries, and more. ⚽</p>
+    <p>Explore the world of football – stories, rivalries, goals, and greatness. Dive into the magic of Messi, Ronaldo, Mbappé and more.</p>
 
-    <!-- Reels Section -->
-    <section>
-      <h2>🔥 Trending Reels</h2>
-      <video width="320" height="240" controls autoplay muted loop style="border-radius: 10px;">
-        <source src="https://cdn.videvo.net/videvo_files/video/free/2015-09/large_watermarked/Football2Videvo_preview.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <p><strong>Messi's magic moment ⚡</strong></p>
-    </section>
+    <div class="adsense-block">[AdSense Ad Here]</div>
 
-    <!-- Upcoming Matches -->
-    <section>
-      <h2>📅 Upcoming Matches</h2>
-      <ul>
-        <li>10 July: Argentina vs Brazil – 10:30 PM IST</li>
-        <li>12 July: France vs Portugal – 8:00 PM IST</li>
-        <li>15 July: Man City vs Real Madrid – 7:30 PM IST</li>
-      </ul>
-    </section>
+    <h3>Watch Messi’s Top Goals</h3>
+    <iframe width="100%" height="200" src="https://www.youtube.com/embed/nFg0N_JesWs" frameborder="0" allowfullscreen></iframe>
+
+    <h3>Watch Ronaldo’s Legendary Skills</h3>
+    <iframe width="100%" height="200" src="https://www.youtube.com/embed/mhfJSTJTnXU" frameborder="0" allowfullscreen></iframe>
+
+    <h3>⚽ Upcoming Matches</h3>
+    <iframe src="https://www.scorebat.com/embed/matches/" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
   </main>
 
-  <!-- Footer with Time -->
-  <footer>
-    <p>© 2025 FootyVerse | All Rights Reserved</p>
-    <p id="clock"></p>
-    <script>
-      function updateTime() {
-        const now = new Date();
-        document.getElementById('clock').textContent =
-          'Local Time: ' + now.toLocaleTimeString();
-      }
-      setInterval(updateTime, 1000);
-      updateTime();
-    </script>
-  </footer>
-
+  <footer>&copy; 2025 FootyVerse</footer>
 </body>
 </html>
