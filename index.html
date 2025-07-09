@@ -4,17 +4,75 @@
   <meta charset="UTF-8" />
   <title>FootyVerse - Where Legends Collide</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #111;
+      color: #fff;
+      padding: 10px 20px;
+    }
+    header img {
+      height: 40px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      flex: 1;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+      font-weight: bold;
+    }
+    main {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    section {
+      margin-top: 30px;
+    }
+    video {
+      border-radius: 12px;
+      max-width: 100%;
+    }
+    footer {
+      text-align: center;
+      background: #111;
+      color: white;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+    .score-banner {
+      background:#ffe600;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- 🔴 Live Score Banner -->
-  <div style="background:#ffe600;padding:10px;text-align:center;font-weight:bold;">
-    🟢 Live Score: <span id="liveScore">Real Madrid 2 - 1 Barcelona (76')</span>
+  <!-- Live Score Banner -->
+  <div class="score-banner">
+    🟢 Live Score: Real Madrid 2 - 1 Barcelona (76')
   </div>
 
-  <!-- 🔵 Header -->
+  <!-- Header -->
   <header>
-    <img src="assets/images/logo.png" alt="FootyVerse Logo" style="height:50px;" />
+    <img src="assets/images/logo.png" alt="FootyVerse Logo" />
     <h1>FootyVerse</h1>
     <nav>
       <a href="index.html">Home</a>
@@ -24,22 +82,22 @@
     </nav>
   </header>
 
-  <!-- 🟢 Main Content -->
+  <!-- Main Content -->
   <main>
     <h2>Welcome to FootyVerse</h2>
     <p>Explore football stories, rivalries, and more. ⚽</p>
 
-    <!-- 🔥 Reels Section -->
+    <!-- Reels Section -->
     <section>
       <h2>🔥 Trending Reels</h2>
-      <video width="320" height="240" controls autoplay muted loop style="border-radius: 10px;">
+      <video controls autoplay muted loop>
         <source src="https://cdn.videvo.net/videvo_files/video/free/2015-09/large_watermarked/Football2Videvo_preview.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <p><strong>Messi's magic moment ⚡</strong></p>
     </section>
 
-    <!-- 📅 Upcoming Matches -->
+    <!-- Upcoming Matches -->
     <section>
       <h2>📅 Upcoming Matches</h2>
       <ul>
@@ -50,7 +108,7 @@
     </section>
   </main>
 
-  <!-- 🔘 Footer with Clock -->
+  <!-- Footer -->
   <footer>
     <p>© 2025 FootyVerse | All Rights Reserved</p>
     <p id="clock"></p>
